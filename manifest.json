@@ -1,0 +1,33 @@
+{
+    "manifest_version": 3,
+    "name": "Heatmap Extensions",
+    "description": "Base Level Extension",
+    "version": "1.0",
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": "heatmap-extension.png"
+
+    },
+
+    "permissions": [
+        "tabs",
+        "activeTab"
+        ],
+
+    "background": {
+        "service_worker": "background.js"
+      },
+
+      
+    "content_scripts": [
+        {
+        "js": ["scripts/p5.min.js", "scripts/p5.fillGradient.js", "scripts/content.js"],
+        "matches": [
+            "<all_urls>",
+            "https://developer.chrome.com/docs/extensions/*",
+            "https://developer.chrome.com/docs/webstore/*"
+            ]
+        }
+    ]
+
+}

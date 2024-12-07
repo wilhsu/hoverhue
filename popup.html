@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="popup.css" />
+    </head>
+    <body>
+      <div id="mainCon">
+        <h1 id="extTitle">HeatMap</h1>
+        <div id="tools">
+          <div class="sec" id="stopwatch"></div>
+          <!-- <div class="sec"><input id="userinput" type="text"/></div> -->
+          
+          <div class="sec" id="timeInterval">
+            select time interval:
+            <br>
+            <input type="radio" value="s" name="intervalOpt" id="s"/>
+            <label for="s">1s</label>
+            <input type="radio" value="m" name="intervalOpt" id="m" checked/>
+            <label for="m">1m</label>
+            <input type="radio" value="h" name="intervalOpt" id="h"/>
+            <label for="h">1h</label>
+            <br>
+            <button id="sendDataButton">Enter</button>
+          </div>
+          <div class="sec" id="mapVis">
+            <!-- <p>Visibility</p> -->
+            <label for="visibilityToggle">Map Visibility:</label><br>
+            <!-- <input type="checkbox" id="visibilityToggle" name="mapVis" value="Visible" /> -->
+             <button id="showButton">Show Map</button><button id="hideButton">Hide Map</button>
+            
+          </div>
+          <div class="sec" id="archiveLink">Go to Archive</div>
+        </div>
+
+
+      </div>
+    </body>
+    <script src="./popup.js"></script>
+    <!-- <script src="scripts/content.js" defer></script> -->
+</html>
