@@ -32,7 +32,7 @@ function setup() {
   newCanvas = createCanvas(windowWidth, h);
   newCanvas.position(0, 0);
   newCanvas.style("pointer-events", "none");
-  newCanvas.style("z-index", "999"); // Ensure canvas is above other elements
+  newCanvas.style("z-index", "999"); // trust issues, can you tell?
   colorMode(RGB, 255, 255, 255, 1);
   console.log("Canvas is setup");
 }

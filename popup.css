@@ -1,65 +1,86 @@
 body {
-    /* position: absolute; */
-    z-index: 100000;
-    height: 300px;
+    z-index: 10;
+    height: 240px;
     width: 200px;
-    /* background-color: rgb(235, 235, 235); */
-    background-image: linear-gradient(orange, white, blue);
-  
-    /* margin: 10px;
-    padding: 10px;
-    border-radius: 15px; */
+    background-image: linear-gradient(#2196F3, #ff8181, #bac742);
     top: 0;
     right: 0px;
-    /* box-shadow: 2px 2px 5px rgba(48, 48, 48, 0.55); */
-    
-    /* text-align: center;
-    font-family: Arial, Helvetica, sans-serif; */
-}
-
-#extTitle{
-    text-align: left;
-    color: rgb(178, 116, 0);
-    font-size: 32px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/* #tools{
+    border-radius: 50px;
     color: white;
-    background-color: rgb(114, 115, 135);
-    padding: 10px;
-    border-radius: 20px;
-} */
-
-.sec{
-    /* background-image: linear-gradient(rgb(236, 236, 236), rgb(229, 229, 229)); */
+  }
+  
+  #tools{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #gradientCanvas {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  
+  #extTitle {
+    text-align: left;
+    color: rgb(255, 227, 176);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .sec {
     background-color: white;
-    /* box-shadow: 0px 0px 5px, rgb(255, 166, 0); */
     padding: 5px;
     margin: 5px;
-    color: rgb(20, 16, 89);
+    color: rgb(90, 84, 200);
     border-radius: 20px;
-
     font-size: 16px;
     text-align: center;
-}
+  }
   
-/* #canvasHTML {
-    z-index: 100000000000;
+  main {
+    z-index: 100;
     display: block;
     position: absolute;
-} */
-
-main{
-    z-index: 100000000000;
-    display: block;
-    position: absolute;
-}
-
-#visibilityToggle{
+  }
+  
+  #visibilityToggle {
     width: 20px;
-}
-/* canvas{
-    z-index: 10000000;
-    display: block;
-} */
+  }
+  
+  canvas {
+    z-index: 100 !important;
+    opacity: 1 !important;
+    pointer-events: none;
+  }
+  
+  #timeTracker {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    z-index: 2000 !important; /* Ensure it's above the canvas */
+    display: none; /* Controlled by JavaScript */
+    opacity: 1 !important;
+    pointer-events: auto; /* Allow interaction */
+  }
+  
+  #screenshot {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 2000;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    margin: 5px;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+  
+  
+  #screenshot:hover{
+    background-color: rgba(255, 255, 255, 0.36);
+    color: black;
+  }
+  
