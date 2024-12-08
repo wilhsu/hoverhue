@@ -17,68 +17,54 @@ function setup(){
 }
 
 function draw(){
-    background(255, 0, 0, 0);
-    if(mouseAct){
-        fillGradient('radial', {
-        from : [mouseX, mouseY, 0],
-        to : [mouseX, mouseY, timePassed*10],
-        steps : [
-            color(252, 93, 255, 0.2),
-            color(150, 255, 90, 0.1),
-            color(255, 251, 0, 0.1),
-            color(255, 151, 107, 0.1),
-            color(255,255,255, 0.1)
-        ]
-        });
-        noStroke();
-        ellipse(mouseX, mouseY, timePassed*10);
+  background(255, 0, 0, 0);
+  if(mouseAct){
+      fillGradient('radial', {
+      from : [mouseX, mouseY, 0],
+      to : [mouseX, mouseY, timePassed*10],
+      steps : [
+          color(252, 93, 255, 0.2),
+          color(150, 255, 90, 0.1),
+          color(255, 251, 0, 0.1),
+          color(255, 151, 107, 0.1),
+          color(255,255,255, 0.1)
+      ]
+      });
+      noStroke();
+      ellipse(mouseX, mouseY, timePassed*10);
 
-        // console.log(seconds);
-        if (int(millis() / 100) % 10 != milliseconds) {
-            milliseconds++;
-        }
-        if (milliseconds >= 10) {
-            milliseconds -= 10;
-            seconds++;
-        }
-        if (seconds >= 60) {
-            seconds -= 60;
-            minutes++;
-        }
-    }
+      // console.log(seconds);
+      if (int(millis() / 100) % 10 != milliseconds) {
+          milliseconds++;
+      }
+      if (milliseconds >= 10) {
+          milliseconds -= 10;
+          seconds++;
+      }
+      if (seconds >= 60) {
+          seconds -= 60;
+          minutes++;
+      }
+  }
 }
 
 function mouseMoved(){
-  milliseconds = 0;
-  seconds = 0;
-  minutes = 0;
-  hrs = 0;
+milliseconds = 0;
+seconds = 0;
+minutes = 0;
+hrs = 0;
 }
 
 
-let dataFromContent = {
-    s: seconds,
-    m: minutes,
-    h: hrs,
-};
+// let dataFromContent = {
+//     s: seconds,
+//     m: minutes,
+//     h: hrs,
+// };
 
-chrome.runtime.sendMessage({ action: "sendDataToPopup", data: dataFromContent });
+// chrome.runtime.sendMessage({ action: "sendDataToPopup", data: dataFromContent });
 
 chrome.runtime.sendMessage({ action: "getDataFromContentScript", data: "someData" });
-
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.action === "toggleVisibility") {
-      const element = document.querySelector("#defaultCanvas0");  // Example: target a specific element
-  
-      if (element) {
-        if (message.visibility === "show") {
-          element.style.opacity = "1";  // Show the element
-        } else if (message.visibility === "hide") {
-          element.style.opacity = "0";   // Hide the element
-        }
-      }
-    }
-  });
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "updateContent") {
@@ -100,6 +86,18 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
     //   console.log(timePassed);
 
+    if (message.action === "toggleVisibility") {
+      const element = document.querySelector("#defaultCanvas0");  // Example: target a specific element
+  
+      if (element) {
+        if (message.visibility === "show") {
+          element.style.opacity = "1";  // Show the element
+        } else if (message.visibility === "hide") {
+          element.style.opacity = "0";   // Hide the element
+        }
+      }
+    }
+
     console.log("Received input value from popup:", newTimeVal);
     console.log("Time passed:", timePassed);
     //   console.log(newTimeVal);
@@ -112,4 +110,3 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     //   document.body.innerText = `New Content: ${newTimeVal}`;
     }
 });
-

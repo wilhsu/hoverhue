@@ -48,10 +48,6 @@ document.getElementById("hideButton").addEventListener("click", () => {
 //   }
 // });
 
-// document.getElementById("visibilityToggle").addEventListener("click", showHide);
-// // let c = document.getElementById("defaultCanvas0");
-// // let c = document.querySelector("ca");
-
 // function showHide() {
 //     console.log(c);
 // //   var x = document.getElementById("canvasHTML");
