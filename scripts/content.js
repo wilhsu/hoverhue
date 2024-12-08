@@ -32,8 +32,35 @@ function setup() {
   newCanvas = createCanvas(windowWidth, h);
   newCanvas.position(0, 0);
   newCanvas.style("pointer-events", "none");
-  newCanvas.style("z-index", "999"); // trust issues, can you tell?
+  newCanvas.style("z-index", "999"); // Ensure canvas is above other elements
   colorMode(RGB, 255, 255, 255, 1);
+  gradientColors = {
+        morning: [
+          color(255, 251, 0, 0.1),
+          color(150, 255, 90, 0.2),
+          color(252, 93, 255, 0.1),
+          color(255, 151, 107, 0.2),
+        ],
+        afternoon: [
+          color(255, 126, 62, 0.1),
+          color(245, 51, 51, 0.2),
+          color(255, 195, 0, 0.1),
+          color(250, 109, 170, 0.2),
+        ],
+        night: [
+          color(255, 163, 58, 0.1),
+          color(66, 98, 255, 0.2),
+          color(91, 56, 180, 0.1),
+          color(0, 10, 143, 0.2),
+        ],
+        midnight: [
+          color(0, 3, 101, 0.1),
+          color(149, 0, 255, 0.2),
+          color(72, 0, 255, 0.1),
+          color(67, 0, 63, 0.2),
+        ],
+      };
+
   console.log("Canvas is setup");
 }
 
@@ -45,20 +72,25 @@ function draw() {
 
   background(255, 0, 0, 0);
 
-  if (isTracking) {
-    fillGradient("radial", {
-      from: [mouseX, mouseY, 0],
-      to: [mouseX, mouseY, timePassed],
-      steps: [
-        color(255, 163, 58, 0.1),
-      color(66, 98, 255, 0.2),
-      color(91, 56, 180, 0.1),
-      color(0, 10, 143, 0.2),
-      ],
-    });
-    noStroke();
-    ellipse(mouseX, mouseY, timePassed * 2);
-    timePassed += 0.5;
+  function currentGradientColor() {
+  const hour = new Date().getHours();
+  if (hour >= 6 && hour < 12) return gradientColors.morning;
+  if (hour >= 12 && hour < 18) return gradientColors.afternoon;
+  if (hour >= 18 && hour < 24) return gradientColors.night;
+  return gradientColors.midnight;
+}
+
+  if (isTracking && mouseAct) {
+        background(0, 0, 0, 0);
+        const colors = currentGradientColor();
+        fillGradient("radial", {
+          from: [mouseX, mouseY, 0],
+          to: [mouseX, mouseY, timePassed],
+          steps: colors,
+        });
+        noStroke();
+        ellipse(mouseX, mouseY, timePassed * 2);
+        timePassed += 0.5;
   }
 }
 
