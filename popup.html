@@ -9,19 +9,18 @@
         <div class="sec" id="timeInterval">
           Select time interval:
           <br />
-          <input type="radio" value="s" name="intervalOpt" id="s" />
+          <input type="radio" value="1000" name="intervalOpt" id="s" />
           <label for="s">1s</label>
-          <input type="radio" value="m" name="intervalOpt" id="m" checked />
+          <input type="radio" value="60000" name="intervalOpt" id="m" checked />
           <label for="m">1m</label>
-          <input type="radio" value="h" name="intervalOpt" id="h" />
+          <input type="radio" value="3600000" name="intervalOpt" id="h" />
           <label for="h">1h</label>
+          <button id="sendDataButton">Enter</button>
         </div>
-
         <div class="sec" id="mapVis">
           <label for="visibilityToggle">Map Visibility:</label>
           <input type="checkbox" id="visibilityToggle" checked/>
         </div>
-
         <div class="sec" id="trackingToggle">
           <label for="trackingToggle">Cursor Tracking:</label>
           <input type="checkbox" id="trackingToggle" checked />
