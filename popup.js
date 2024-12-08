@@ -23,6 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+
+document.getElementById("sendDataButton").addEventListener("click", ()=> {
+  const timeVal = document.querySelector('input[name="intervalOpt"]:checked').value;
+
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    chrome.tabs.sendMessage(tabs[0].id, { action: "updateContent", timeVal: timeVal });
+  });
+})
+  // let timeChecked = document.querySelector('input[name="intervalOpt"]');
+  // console.log(timeChecked.value);
+
   // Map visibility toggle functionality
   visibilityToggle.addEventListener("change", () => {
     const opacity = visibilityToggle.checked ? "1" : "0";

@@ -4,6 +4,7 @@ let mouseAct = true; // Controls gradient rendering
 let isExtensionActive = false; // Prevent rendering before activation
 let currentCell = null;
 let startTime = null;
+let newTimeVal = 0;
 
 // Cell tracking logic
 const CELL_WIDTH = 50;
@@ -26,6 +27,24 @@ floatingDiv.style.borderRadius = "5px";
 floatingDiv.style.display = "none";
 floatingDiv.style.zIndex = "1000";
 document.body.appendChild(floatingDiv);
+
+// Handle messages from popup
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.action === "activateExtension") {
+    isExtensionActive = true;
+    console.log("Extension activated");
+  } else if (message.action === "toggleTracking") {
+    isTracking = message.value;
+    console.log(`Cursor Tracking: ${isTracking ? "ON" : "OFF"}`);
+  } else if (message.action === "toggleVisibility") {
+    mouseAct = message.value;
+    console.log(`Map Visibility: ${mouseAct ? "ON" : "OFF"}`);
+  }
+  if (message.action === "updateContent"){
+    newTimeVal = message.timeVal;
+    console.log("Received input value from popup:", newTimeVal);
+  }
+});
 
 function setup() {
   let h = document.body.clientHeight;
@@ -142,13 +161,18 @@ function draw() {
         const colors = currentGradientColor();
         fillGradient("radial", {
           from: [mouseX, mouseY, 0],
-          to: [mouseX, mouseY, timePassed],
+          to: [mouseX, mouseY, timePassed*10],
           steps: colors,
         });
         noStroke();
-        ellipse(mouseX, mouseY, timePassed * 2);
-        timePassed += 0.5;
+        ellipse(mouseX, mouseY, timePassed*10);
+        // timePassed += 0.5;
+        timePassed = Math.floor((Date.now() - startTime) / newTimeVal);
+        if (timePassed > 60){
+          timePassed = 0;
+        }
   }
+  console.log('time passed:', timePassed);
 }
 
 // Get cell from cursor position
@@ -201,19 +225,7 @@ document.addEventListener("mousemove", (event) => {
   currentCell = newCell;
 });
 
-// Handle messages from popup
-chrome.runtime.onMessage.addListener((message) => {
-  if (message.action === "activateExtension") {
-    isExtensionActive = true;
-    console.log("Extension activated");
-  } else if (message.action === "toggleTracking") {
-    isTracking = message.value;
-    console.log(`Cursor Tracking: ${isTracking ? "ON" : "OFF"}`);
-  } else if (message.action === "toggleVisibility") {
-    mouseAct = message.value;
-    console.log(`Map Visibility: ${mouseAct ? "ON" : "OFF"}`);
-  }
-});
+
 
 // Log 2D array periodically
 setInterval(() => {
