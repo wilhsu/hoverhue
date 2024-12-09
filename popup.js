@@ -19,12 +19,20 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-document.getElementById("sendDataButton").addEventListener("click", ()=> {
-  const timeVal = document.querySelector('input[name="intervalOpt"]:checked').value;
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    chrome.tabs.sendMessage(tabs[0].id, { action: "updateContent", timeVal: timeVal });
+  document.getElementById("sendDataButton").addEventListener("click", () => {
+    const selectedInterval = document.querySelector(
+      'input[name="intervalOpt"]:checked'
+    ).value;
+  
+    chrome.runtime.sendMessage(
+      { action: "updateTimeInterval", value: parseInt(selectedInterval) },
+      (response) => {
+        console.log("Time interval update sent:", response.status);
+      }
+    );
   });
-})
+  
+  
   // let timeChecked = document.querySelector('input[name="intervalOpt"]');
   // console.log(timeChecked.value);
   // Map visibility toggle functionality
@@ -59,19 +67,16 @@ document.getElementById("sendDataButton").addEventListener("click", ()=> {
   });
 });
 
-
+// WILL'S UPDATE
 // document.addEventListener("DOMContentLoaded", () => {
 //   const trackingToggle = document.getElementById("trackingToggle");
 //   const visibilityToggle = document.getElementById("visibilityToggle");
-
 //   // Debugging initialization
 //   console.log("Popup loaded. Tracking and Visibility toggles initialized.");
-
 //   // Tracking toggle functionality
 //   trackingToggle.addEventListener("change", (event) => {
 //     const isChecked = event.target.checked;
 //     console.log("Tracking Toggle changed. New state:", isChecked);
-
 //     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 //       if (tabs.length > 0) {
 //         console.log("Sending message to content script for Tracking Toggle.");
@@ -84,12 +89,16 @@ document.getElementById("sendDataButton").addEventListener("click", ()=> {
 //       }
 //     });
 //   });
+// document.getElementById("sendDataButton").addEventListener("click", ()=> {
+//   const timeVal = document.querySelector('input[name="intervalOpt"]:checked').value;
+//   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+//     chrome.tabs.sendMessage(tabs[0].id, { action: "updateContent", timeVal: timeVal });
+//   });
+// })
 
-//   // Map visibility toggle functionality
-//   visibilityToggle.addEventListener("change", () => {
+// visibilityToggle.addEventListener("change", () => {
 //     const opacity = visibilityToggle.checked ? "1" : "0";
 //     console.log("Visibility Toggle changed. New opacity:", opacity);
-
 //     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 //       if (tabs.length > 0) {
 //         console.log("Executing script to update gradientCanvas opacity.");
@@ -112,7 +121,6 @@ document.getElementById("sendDataButton").addEventListener("click", ()=> {
 //       }
 //     });
 //   });
-  
 //   // Activate extension when popup is opened
 //   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 //     chrome.tabs.sendMessage(tabs[0].id, { action: "activateExtension" });
