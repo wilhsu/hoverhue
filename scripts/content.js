@@ -226,8 +226,6 @@ document.addEventListener("mousemove", (event) => {
   } else {
     const cellData = cellTimeData[row][col];
     floatingDiv.textContent = `You have spent ${cellData.hours}h ${cellData.minutes}m ${cellData.seconds}s here`;
-    // floatingDiv.textContent = `thank you :)`; // Makin a system lol
-    // floatingDiv.textContent = `HOVER HUE :)`;
     floatingDiv.style.left = `${event.clientX + 20}px`;
     floatingDiv.style.top = `${event.clientY - 20}px`;
     floatingDiv.style.display = "block";
