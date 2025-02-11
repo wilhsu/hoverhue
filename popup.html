@@ -7,27 +7,53 @@
   </head>
   <body>
     <div id="mainCon">
-      <h1 id="extTitle">HoverHue</h1>
+      <!-- <h1 id="extTitle">HoverHue</h1> -->
+      <img id="extTitle" src="images/extTitle.svg">
       <div id="tools">  
         
         <div class="sec" id="timeInterval">
           Select Growth Rate:
-          <br/>
-          <input type="radio" value="1000" name="intervalOpt" id="s" checked/>
+          <!-- <input type="radio" value="1000" name="intervalOpt" id="s" checked/>
           <label for="s">1s</label>
           <input type="radio" value="60000" name="intervalOpt" id="m" />
           <label for="m">1m</label>
           <input type="radio" value="3600000" name="intervalOpt" id="h" />
-          <label for="h">1h</label>
+          <label for="h">1h</label> -->
+          <br>
+          <label class="radioContainer">
+            <input type="radio" value="1000" id="s" name="intervalOpt" checked/>
+            <span class="checkmark"></span>
+            <span class="radioLabel">1s</span>
+          </label>
+          <label class="radioContainer">
+            <input type="radio" value="60000" id="m" name="intervalOpt">
+            <span class="checkmark"></span>
+            <span class="radioLabel">1m</span>
+          </label>
+          <label class="radioContainer">
+            <input type="radio" value="3600000" id="h" name="intervalOpt">
+            <span class="checkmark"></span>
+            <span class="radioLabel">1h</span>
+          </label>
           <button id="sendDataButton">Enter</button>
         </div>
         <div class="sec" id="mapVis">
-          <label for="visibilityToggle" id="mapLabel">&nbsp; Map Visibility</label>
-          <input type="checkbox" id="visibilityToggle" checked/>
+          <!-- <label for="visibilityToggle" id="mapLabel">&nbsp; Map Visibility</label>
+          <input type="checkbox" id="visibilityToggle" checked/> -->
+          <span id="mapLabel">&nbsp;Map Visibility</span>
+          <label for="visibilityToggle" class="switch">
+            <input type="checkbox" id="visibilityToggle" checked/>
+            <span class="slider round"></span>
+          </label>
         </div>
-        <div class="sec" id="trackingToggle">
-          <label for="trackingToggle" id="mapLabel">&nbsp; Map Active</label>
-          <input type="checkbox" id="trackingToggle" checked />
+        <div class="sec" id="trackVis">
+          <!-- <label for="trackingToggle" id="mapLabel">&nbsp; Map Active</label>
+          <input type="checkbox" id="trackingToggle" checked /> -->
+          <span id="mapLabel">&nbsp;Map Active</span>
+          <label for="trackingToggle" class="switch">
+            <input type="checkbox" id="trackingToggle" checked/>
+            <span class="slider round"></span>
+          </label>
         </div>
       </div>
       <div id="credits">by Hiya Singh and Will Hsu 2024</div>

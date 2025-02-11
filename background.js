@@ -12,7 +12,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     tabs.forEach((tab) => {
       chrome.tabs.sendMessage(tab.id, message, (response) => {
         if (chrome.runtime.lastError) {
-          console.error(`Error sending message to tab ${tab.id}:`, chrome.runtime.lastError.message);
+          // console.error(`Error sending message to tab ${tab.id}:`, chrome.runtime.lastError.message);
         }
       });
     });
